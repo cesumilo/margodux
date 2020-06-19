@@ -1,6 +1,8 @@
 # margodux
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/cesumilo/margodux)](https://goreportcard.com/report/github.com/cesumilo/margodux)
 [![GoDoc](https://godoc.org/github.com/cesumilo/margodux?status.svg)](https://godoc.org/github.com/cesumilo/margodux)
+[![codecov](https://codecov.io/gh/cesumilo/margodux/branch/master/graph/badge.svg)](https://codecov.io/gh/cesumilo/margodux)
 
 **Version:** v1.0.0
 
