@@ -23,7 +23,60 @@ That's how the idea came to me to build a redux-like module called `margodux`. I
 
 ## Getting started
 
-> TODO
+**Creating a new store**
+
+```go
+store := margodux.New()
+```
+
+**Creating a new reducer**
+
+```go
+initialState := margodux.State{"foo": "bar"}
+store.Register("test", initialState, func(state State, action Action) State {
+  switch action.ID {
+  case "test":
+    return State{"foo": "oof"}
+  default:
+    return initialState
+  }
+})
+```
+
+**Getting current state**
+
+```go
+currentState := store.GetState()
+fmt.Println(currentState["test"]["foo"]) // bar
+```
+
+**Dispatching action**
+
+```go
+store.Dispatch(Action{ID: "test", Payload: nil, Err: false})
+
+currentState := store.GetState()
+
+fmt.Println(currentState["test"]["foo"]) // oof
+```
+
+**Dispatching async action**
+
+```go
+type TestAsyncAction struct{}
+
+func (t *TestAsyncAction) Run(s *Store) {
+  s.Dispatch(Action{ID: "test", Payload: nil, Err: false})
+}
+
+store.Dispatch(&TestAsyncAction{})
+
+time.Sleep(1 * time.Second)
+
+currentState := store.GetState()
+
+fmt.Println(currentState["test"]["foo"]) // oof
+```
 
 ## Test
 
