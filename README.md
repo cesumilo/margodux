@@ -1,5 +1,7 @@
 # margodux
 
+[![GoDoc](https://godoc.org/github.com/cesumilo/margodux?status.svg)](https://godoc.org/github.com/cesumilo/margodux)
+
 **Version:** v1.0.0
 
 ## About

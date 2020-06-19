@@ -1,0 +1,33 @@
+##
+# @author Guillaume Robin <guillaume@inarix.com>
+# @file Workflow for Codecov
+# @desc Created on 2020-06-19 9:59:06 pm
+# @copyright Inarix
+#
+name: Workflow for Codecov
+on: [push]
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    env:
+      OS: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "^1.14"
+      - name: Generate coverage report
+        run: |
+          go test -coverprofile=coverage.out
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.out
+          env_vars: OS
+          name: codecov-umbrella
+          fail_ci_if_error: true
